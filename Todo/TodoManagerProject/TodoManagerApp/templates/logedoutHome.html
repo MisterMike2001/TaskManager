@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}About - Task Manager{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <h1>Welcome to Task Manager</h1>
+    <p class="intro">
+        Task Manager is a simple, powerful web application to help you manage your daily tasks more efficiently. 
+        Whether you're juggling personal to-dos or project milestones, Task Manager helps you stay on top of everything.
+    </p>
+
+    <div class="features">
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>Organize Tasks:</strong> Sort tasks into Queued, In Progress, and Completed columns.</li>
+            <li><strong>Live Editing:</strong> Update task title, description, and status with ease.</li>
+            <li><strong>Interactive Interface:</strong> Click on a task to view or edit details instantly.</li>
+            <li><strong>User Accounts:</strong> Secure login and user-specific task boards.</li>
+        </ul>
+    </div>
+
+    <div class="how-it-works">
+        <h2>How It Works</h2>
+        <p>Simply log in, add a new task, and watch your productivity flow. Drag between stages (coming soon), and manage everything from one intuitive dashboard.</p>
+    </div>
+
+    <div class="cta">
+        <a href="/members/register" class="btn">Get Started</a>
+        <a href="/members/login_user" class="btn btn-secondary">Log In</a>
+    </div>
+</div>
+
+<style>
+.about-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.about-container h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.intro {
+    font-size: 1.1rem;
+    text-align: center;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.features h2,
+.how-it-works h2 {
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    color: #444;
+}
+
+.features ul {
+    padding-left: 1.2rem;
+    list-style-type: disc;
+}
+
+.features li {
+    margin-bottom: 0.8rem;
+    color: #444;
+}
+
+.how-it-works p {
+    margin-top: 1rem;
+    color: #555;
+}
+
+.cta {
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #6b6bd6;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #5757c2;
+}
+
+.btn-secondary {
+    background-color: #999;
+}
+
+.btn-secondary:hover {
+    background-color: #777;
+}
+</style>
+{% endblock %}

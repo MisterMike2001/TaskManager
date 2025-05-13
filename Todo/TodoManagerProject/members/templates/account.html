@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+<h2 class="form-title">Update Your Profile</h2>
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-btn">Update</button>
+    </form>
+</div>
+
+<style>
+    .form-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 2rem;
+        color: #333;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    form p {
+        margin-bottom: 1.5rem;
+    }
+
+    form label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #444;
+    }
+
+    form input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    form input:focus {
+        outline: none;
+        border-color: #6b6bd6;
+        box-shadow: 0 0 0 3px rgba(107, 107, 214, 0.2);
+    }
+
+    .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #6b6bd6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+        background-color: #5757c2;
+    }
+</style>
+{% endblock %}

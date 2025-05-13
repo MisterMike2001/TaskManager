@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1 class="form-title">Login</h1>
+<form class="form-container" method="POST" action="/members/login_user/">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ request.POST.username }}" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button class="login-btn" type="submit">Login</button>
+    <div class="register-link">
+        <span>Don't have an account?</span>
+        <a href="/members/register">Register</a>
+    </div>
+</form>
+
+<!-- Display error messages -->
+{% if messages %}
+    <div class="error-messages">
+        {% for message in messages %}
+            <p class="error">{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<style>
+    .form-title {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 2rem;
+        color: #333;
+    }
+
+    .form-container {
+        max-width: 400px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #444;
+    }
+
+    .form-group input {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #6b6bd6;
+        box-shadow: 0 0 0 3px rgba(107, 107, 214, 0.2);
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #6b6bd6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+        background-color: #5757c2;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .register-link a {
+        color: #6b6bd6;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .register-link a:hover {
+        text-decoration: underline;
+    }
+
+    .error-messages {
+        color: #f44336;
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .error {
+        margin: 0.5rem 0;
+    }
+</style>
+{% endblock %}

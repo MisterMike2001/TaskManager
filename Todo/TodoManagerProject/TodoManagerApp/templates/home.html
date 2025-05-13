@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1>Task Summary</h1>
+<!-- <div style="display: flex; gap: 20px; justify-content: center;">
+    <div>
+        <canvas id="queuedChart" width="200" height="200"></canvas>
+        <p style="text-align: center;">Queued</p>
+    </div>
+    <div>
+        <canvas id="progressChart" width="200" height="200"></canvas>
+        <p style="text-align: center;">In Progress</p>
+    </div>
+    <div>
+        <canvas id="completedChart" width="200" height="200"></canvas>
+        <p style="text-align: center;">Completed</p>
+    </div>
+</div> -->
+<div class="counts">
+    <div class="count-box queued">
+        <span class="label">Queued</span>
+        <span class="value">{{ counts.queued }}</span>
+    </div>
+    <div class="count-box in-progress">
+        <span class="label">In Progress</span>
+        <span class="value">{{ counts.in_progress }}</span>
+    </div>
+    <div class="count-box completed">
+        <span class="label">Completed</span>
+        <span class="value">{{ counts.completed }}</span>
+    </div>
+</div>
+
+
+<h1>Tasks In Progress</h1>
+
+    {% with in_progress_tasks=todos|dictsort:"status" %}
+        {% for todo in in_progress_tasks %}
+            {% if todo.status == "in_progress" %}
+                <div class="task">
+                    <strong>{{ todo.title }}</strong><br>
+                    <span>{{ todo.description }}</span>
+                </div>
+            {% endif %}
+        {% empty %}
+            <p>No tasks in progress. You're all caught up!</p>
+        {% endfor %}
+    {% endwith %}
+    
+    <style>
+    .task {
+        background-color: white;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .counts {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.count-box {
+    background-color: #f9f9f9;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    min-width: 120px;
+}
+
+.count-box .label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.count-box .value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.count-box.queued {
+    border-top: 4px solid #6b6bd6;
+}
+
+.count-box.in-progress {
+    border-top: 4px solid #f1c40f;
+}
+
+.count-box.completed {
+    border-top: 4px solid #2ecc71;
+}
+
+
+    </style>
+{% endblock %}
+
