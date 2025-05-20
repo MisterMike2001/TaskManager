@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Todo Board{% endblock %}
+
+{% block content %}
+<h1>Your Teams</h1>
+<div class="addTeam">
+    <a href="/createteam">Create team </a>
+</div>
+<div class="team-list">
+  {% for team in teams %}
+  <a href="/editteam/{{ team.id }}" class="team-link">
+    <div class="team-name">{{ team.team_name }}</div>
+    <div class="team-description">{{ team.team_discription }}</div>
+  </a>
+  {% endfor %}
+</div>
+
+<style>
+  .team-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 1.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .team-link {
+    display: block;
+    padding: 1rem 1.25rem;
+    background-color: #6b6bd6;
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(107, 107, 214, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .team-link:hover,
+  .team-link:focus {
+    background-color: #5757c2;
+    box-shadow: 0 6px 14px rgba(87, 87, 194, 0.5);
+    transform: translateY(-3px);
+    outline: none;
+  }
+  .team-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .team-description {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9;
+  }
+  @media (max-width: 600px) {
+    .team-list {
+      max-width: 90%;
+      gap: 12px;
+    }
+    .team-name {
+      font-size: 1.2rem;
+    }
+    .team-description {
+      font-size: 0.9rem;
+    }
+  }
+  .addTeam {
+    max-width: 500px;
+    margin: 1rem auto 0;
+    text-align: right;
+  }
+
+  .addtask-btn {
+    background-color: #6b6bd6;
+    color: white;
+    font-weight: 700;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .addtask-btn:hover,
+  .addtask-btn:focus {
+    background-color: #5757c2;
+    box-shadow: 0 4px 12px rgba(87, 87, 194, 0.5);
+    outline: none;
+  }
+</style>
+{% endblock %}

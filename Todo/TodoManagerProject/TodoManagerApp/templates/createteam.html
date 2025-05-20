@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Team{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <h1>Create Team</h1>
+
+    <div class="form-group">
+        <label for="team_name">Team Name:</label>
+        <input type="text" id="team_name" name="team_name" class="form-control" ">
+    </div>
+
+    <div class="form-group">
+        <label for="team_description">Description:</label>
+        <textarea id="team_description" name="team_description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="team_role">Role:</label>
+        <input type="text" id="team_role" name="team_role" class="form-control" >
+    </div>
+
+    <button type="submit" class="edit-btn">Save</button>
+</form>
+
+<style>
+    form {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background: #f9f9f9;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    .form-control {
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+    }
+    .edit-btn {
+        background-color: #6b6bd6;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .edit-btn:hover {
+        background-color: #5757c2;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+{% block title %}Todo Board{% endblock %}
+
+{% block content %}
+<h1>Task Board</h1><a href="/addTask" class="AddNew">Add Task</a>
+
+<div class="form-group">
+    <label for="team" class="form-label">Team:</label>
+    <select name="team" id="team-select" class="team-select">
+        {% for team in teams %}
+            <option value="{{ team.id }}" {% if team.id == current_team_id %}selected{% endif %}>
+                {{ team.team_name }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+
+<script>
+    document.getElementById("team-select").addEventListener("change", function() {
+        const teamId = this.value;
+        if (teamId) {
+            window.location.href = `/teamboard/${teamId}`;
+        }
+    });
+</script>
+
+<div class="board">
+    <div class="column" id="queued">
+        <h2>Queued</h2>
+        {% for todo in todos %}
+            {% if todo.status == "queued" %}
+            <a href="/todoitem/{{todo.id}}">
+                <div class="task">
+                    <strong>{{ todo.title }}</strong><br>
+                    <span>{{ todo.description }}</span>
+                    <span class="task-user">@{{ todo.userID.username }}</span>
+
+                </div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="column" id="in-progress">
+        <h2>In Progress</h2>
+        {% for todo in todos %}
+            {% if todo.status == "in_progress" %}
+            <a href="/todoitem/{{todo.id}}">
+            <div class="task">
+                <strong>{{ todo.title }}</strong><br>
+                <span>{{ todo.description }}</span>
+                <span class="task-user">@{{ todo.userID.username }}</span>
+
+            </div>
+        </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="column" id="completed">
+        <h2>Completed</h2>
+        {% for todo in todos %}
+            {% if todo.status == "completed" %}
+            <a href="/todoitem/{{todo.id}}">
+            <div class="task">
+                <strong>{{ todo.title }}</strong><br>
+                <span>{{ todo.description }}</span>
+                <span class="task-user">@{{ todo.userID.username }}</span>
+
+            </div>
+        </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .board {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1;
+    min-width: 250px;
+    background-color: #fafafa;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.column h2 {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0.5rem;
+}
+
+.task {
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    transition: transform 0.2s ease;
+}
+
+.task:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.task strong {
+    font-size: 1.1rem;
+    color: #222;
+}
+
+.task span {
+    display: block;
+    margin-top: 0.3rem;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.task-link {
+    display: none; /* Or remove it entirely unless you're using it for interactivity */
+}
+
+.AddNew {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #6b6bd6;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.AddNew:hover {
+    background-color: #5757c2;
+}
+
+.task-user {
+    display: inline-block;
+    font-weight: 700;
+    color: #6b6bd6;
+    background-color: #e6e9ff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.team-select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none; /* Remove default arrow styling */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+}
+
+.team-select:focus {
+    border-color: #6b6bd6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(107, 107, 214, 0.2);
+}
+.form-label {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+</style>
+{% endblock %}

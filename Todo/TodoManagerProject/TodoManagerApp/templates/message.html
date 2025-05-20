@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Message{% endblock %}
+
+{% block content %}
+<div class="message-container">
+    <h1 class="title">Message</h1>
+
+    <div class="message-card">
+        <p><strong>From:</strong> {{ message.sender.username }}</p>
+        <p><strong>To:</strong> {{ message.reciever_id.username }}</p>
+        <p class="message-text">{{ message.message|urlize|linebreaks }}</p>
+    </div>
+</div>
+
+<style>
+    .message-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+    .title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+    .message-card {
+        background-color: #f5f5ff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 1.2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    .message-text {
+        margin-top: 1rem;
+        font-size: 1.1rem;
+        color: #444;
+        line-height: 1.5;
+    }
+    .message-text a {
+        color: #3366cc;
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}

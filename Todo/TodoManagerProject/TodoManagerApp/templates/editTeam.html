@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Team{% endblock %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <h1 class="form-title">Edit Team</h1>
+
+    <div class="form-group">
+        <label for="team_name">Team Name:</label>
+        <input type="text" id="team_name" name="team_name" class="form-control" value="{{ team.team_name }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="team_description">Description:</label>
+        <textarea id="team_description" name="team_description" class="form-control" rows="3" required>{{ team.team_discription }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="team_role">Role:</label>
+        <input type="text" id="team_role" name="team_role" class="form-control" value="{{ team.roll }}" required>
+    </div>
+
+    <div class="form-group">
+        <label>Team Members:</label>
+        <div class="member-list">
+            {% for member in team_members %}
+                <div class="member-pill">@{{ member.username }}</div>
+            {% empty %}
+                <p class="no-members">No members in this team.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="edit-btn">Save Changes</button>
+    </div>
+</form>
+
+<style>
+    form {
+        max-width: 550px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-title {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #444;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.7rem;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #6b6bd6;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(107, 107, 214, 0.15);
+    }
+
+    .member-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 0.5rem;
+    }
+
+    .member-pill {
+        background-color: #e6e9ff;
+        color: #3b3b84;
+        font-weight: 600;
+        padding: 0.4rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+    }
+
+    .no-members {
+        color: #888;
+        font-style: italic;
+        margin-top: 0.5rem;
+    }
+
+    .form-actions {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .edit-btn {
+        background-color: #6b6bd6;
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .edit-btn:hover {
+        background-color: #5757c2;
+    }
+
+    @media (max-width: 600px) {
+        form {
+            padding: 1.5rem;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
